@@ -3,20 +3,19 @@ package handlers
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 )
 
-func Index(w http.ResponseWriter, r *http.Request) {
-	tpl, err := template.ParseFiles("template/index.html")
-	if err != nil {
-		http.Error(w, "Error al analizar la plantilla", http.StatusInternalServerError)
-		return
-	}
-	if err = tpl.Execute(w, nil); err != nil {
-		http.Error(w, "Error al renderizar la plantilla", http.StatusInternalServerError)
-		return
-	}
+const (
+	// constante que busca carpeta template
+	templateDir = "template/"
+	// const que busca base.html
+	templateBase = templateDir + "base.html"
+)
 
+func Index(w http.ResponseWriter, r *http.Request) {
+	RenderTemplate(w, "index.html", nil)
 }
 
 func NewGame(w http.ResponseWriter, r *http.Request) {
@@ -33,4 +32,16 @@ func Play(w http.ResponseWriter, r *http.Request) {
 
 func About(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "About")
+}
+
+// Funcion Generica que recibe el response, la plantilla base y la plantilla que va a renderizar
+func RenderTemplate(w http.ResponseWriter, page string, data any) {
+	tpl := template.Must(template.ParseFiles(templateBase, templateDir+page))
+
+	// renderizamos en el navegador
+	if err := tpl.ExecuteTemplate(w, "base", nil); err != nil {
+		http.Error(w, "Error al renderizar la plantilla", http.StatusInternalServerError)
+		log.Println(err)
+		return
+	}
 }
