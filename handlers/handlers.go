@@ -19,7 +19,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func NewGame(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Crear nuevo juego")
+	RenderTemplate(w, "new_game.html", nil)
 }
 
 func Game(w http.ResponseWriter, r *http.Request) {
@@ -31,7 +31,7 @@ func Play(w http.ResponseWriter, r *http.Request) {
 }
 
 func About(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "About")
+	RenderTemplate(w, "about.html", nil)
 }
 
 // Funcion Generica que recibe el response, la plantilla base y la plantilla que va a renderizar
