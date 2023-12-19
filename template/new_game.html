@@ -6,8 +6,21 @@ PPT - Nuevo Juego
 
 {{ define "content" }}
 
-<h1>Página de nuevo juego</h1>
+<section>
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center py-4">Ingrese su nombre</h2>
 
-<h3>Holi</h3>
+            <form action="">
+                <div class="mb-3">
+                    <input type="text" name="name" id="name" placeholder="Ingrese su nombre" class="form-control">
+                </div>
+                <div class="d-grid gap-2 py-4">
+                    <button type="submit" class="btn btn-success btn-lg">Empezar a jugar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
 {{ end }}

@@ -19,11 +19,11 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func NewGame(w http.ResponseWriter, r *http.Request) {
-	RenderTemplate(w, "new_game.html", nil)
+	RenderTemplate(w, "game.hml", nil)
 }
 
 func Game(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Juego")
+	RenderTemplate(w, "game.html", nil)
 }
 
 func Play(w http.ResponseWriter, r *http.Request) {
