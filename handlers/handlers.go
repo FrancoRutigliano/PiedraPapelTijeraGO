@@ -14,16 +14,43 @@ const (
 	templateBase = templateDir + "base.html"
 )
 
+// Estructura de jugador
+type Player struct {
+	Name string
+}
+
+// creando jugador
+var player Player
+
 func Index(w http.ResponseWriter, r *http.Request) {
+	restartValues()
 	RenderTemplate(w, "index.html", nil)
 }
 
 func NewGame(w http.ResponseWriter, r *http.Request) {
-	RenderTemplate(w, "game.hml", nil)
+	restartValues()
+	RenderTemplate(w, "new_game.html", nil)
 }
 
 func Game(w http.ResponseWriter, r *http.Request) {
-	RenderTemplate(w, "game.html", nil)
+
+	if r.Method == "POST" {
+		// Leer los datos del formulario
+		err := r.ParseForm()
+		if err != nil {
+			http.Error(w, "Error parseando el form", http.StatusBadRequest)
+			return
+		}
+
+		player.Name = r.Form.Get("name")
+	}
+
+	// Redirecíon a otra ruta
+	if player.Name == "" {
+		http.Redirect(w, r, "/new", http.StatusFound)
+	}
+
+	RenderTemplate(w, "game.html", player)
 }
 
 func Play(w http.ResponseWriter, r *http.Request) {
@@ -31,6 +58,7 @@ func Play(w http.ResponseWriter, r *http.Request) {
 }
 
 func About(w http.ResponseWriter, r *http.Request) {
+	restartValues()
 	RenderTemplate(w, "about.html", nil)
 }
 
@@ -44,4 +72,10 @@ func RenderTemplate(w http.ResponseWriter, page string, data any) {
 		log.Println(err)
 		return
 	}
+}
+
+// Funcion para reiniciar valores
+
+func restartValues() {
+	player.Name = ""
 }
