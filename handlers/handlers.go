@@ -1,10 +1,13 @@
 package handlers
 
 import (
-	"fmt"
+	"encoding/json"
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
+
+	"github.com/FrancoRutigliano/ppt"
 )
 
 const (
@@ -54,7 +57,25 @@ func Game(w http.ResponseWriter, r *http.Request) {
 }
 
 func Play(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Jugar")
+	// Obtener el valor de "c" de los parámetros de la URL y convertirlo a un entero
+	playerChoice, _ := strconv.Atoi(r.URL.Query().Get("c"))
+
+	// Llamar a la función PlayRound con la opción del jugador
+	result := ppt.PlayRound(playerChoice)
+
+	// Convertir el resultado a formato JSON con formato legible
+	out, err := json.MarshalIndent(result, "", "   ")
+	// manejo de error si sucede algo con la serializacion del json
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	// Establecer el encabezado de la respuesta HTTP para indicar que el contenido es de tipo JSON
+	w.Header().Set("Content-Type", "application-json")
+
+	// Escribir la respuesta en formato JSON en el cuerpo de la respuesta HTTP
+	w.Write(out)
 }
 
 func About(w http.ResponseWriter, r *http.Request) {
