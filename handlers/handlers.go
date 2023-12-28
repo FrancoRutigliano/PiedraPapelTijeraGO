@@ -88,7 +88,7 @@ func RenderTemplate(w http.ResponseWriter, page string, data any) {
 	tpl := template.Must(template.ParseFiles(templateBase, templateDir+page))
 
 	// renderizamos en el navegador
-	if err := tpl.ExecuteTemplate(w, "base", nil); err != nil {
+	if err := tpl.ExecuteTemplate(w, "base", data); err != nil {
 		http.Error(w, "Error al renderizar la plantilla", http.StatusInternalServerError)
 		log.Println(err)
 		return
