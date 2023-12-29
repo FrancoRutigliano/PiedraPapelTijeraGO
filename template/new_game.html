@@ -1,8 +1,4 @@
-{{ template "base" . }}
-
-{{ define "title" }} 
-PPT - Nuevo Juego 
-{{ end }}
+{{ define "title" }} RPS web - Nuevo juego {{ end }}
 
 {{ define "content" }}
 
@@ -11,12 +7,12 @@ PPT - Nuevo Juego
         <div class="row">
             <h2 class="text-center py-4">Ingrese su nombre</h2>
 
-            <form action="/game" method="POST">
+            <form action="/game" method="post">
                 <div class="mb-3">
-                    <input type="text" required name="name" id="name" placeholder="Ingrese su nombre" class="form-control">
+                    <input type="text" required placeholder="Ingrese su nombre" name="name" id="name" class="form-control">
                 </div>
                 <div class="d-grid gap-2 py-4">
-                    <button type="submit" class="btn btn-success btn-lg">Empezar a jugar</button>
+                    <button type="submit" class="btn btn-success btn-lg">Empezar a juagar</button>
                 </div>
             </form>
         </div>
