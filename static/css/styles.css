@@ -22,3 +22,19 @@ header nav a:hover  {
     color: rgb(83, 83, 83);
     transition: 0.2s;
 }
+
+/* Estilos para los íconos */
+.social-icons li {
+    list-style: none; /* Elimina los marcadores de lista */
+}
+
+/* Estilos para los enlaces */
+.icon-social-media {
+    color: black; /* Color del texto */
+    text-decoration: none; /* Elimina la decoración del enlace */
+}
+
+.icon-social-media:hover {
+    color: rgb(94, 94, 242);
+    transition: 0.2s;
+}

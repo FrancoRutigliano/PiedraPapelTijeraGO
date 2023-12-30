@@ -1,3 +1,14 @@
+document.addEventListener("DOMContentLoaded", function(){
+    let pc = document.getElementById("player_choice");
+
+    if (pc.innerText.trim() === "") {
+        pc.innerText = "Tenes que jugar tu primera ronda para ver los resultados :)"
+
+        pc.classList.add("texto-info")
+    }
+
+})
+
 let imgArray = [
     "static/img/hand_rock.png",
     "static/img/hand_paper.png",
