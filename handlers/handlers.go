@@ -99,4 +99,6 @@ func RenderTemplate(w http.ResponseWriter, page string, data any) {
 
 func restartValues() {
 	player.Name = ""
+	ppt.ComputerScore = 0
+	ppt.PlayerScore = 0
 }
